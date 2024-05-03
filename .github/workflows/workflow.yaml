@@ -79,4 +79,5 @@ jobs:
           dontuseforce: true
           dontautocreate: true
           appdir: "build" # Diretório que contém o código pronto para ser deployed
-          
+          dontuseforce: true
+          dontautocreate: true
