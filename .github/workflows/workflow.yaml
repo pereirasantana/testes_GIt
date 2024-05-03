@@ -8,6 +8,11 @@ on:
 jobs:
   desafio-CI:
     runs-on: ubuntu-latest
+    # Define o ambiente que requer aprovação para o deploy, alterado para 'teste'
+    environment: 
+      name: teste
+      # URL opcional, que pode ser usada para visualizar o ambiente após o deploy
+      url: ${{ steps.deploy.outputs.url }}
 
     steps:
       - uses: actions/checkout@v3
