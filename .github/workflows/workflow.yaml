@@ -47,4 +47,4 @@ jobs:
           heroku_app_name: ${{ secrets.HEROKU_APP_NAME }}
           heroku_email: pereirasantana@yahoo.com.br
           usedocker: false
-          appdir: "."  # Assegure-se de que este diretório contém os arquivos necessários para executar a aplicação
+          appdir: "build"  # Assegure-se de que este diretório contém os arquivos necessários para executar a aplicação
