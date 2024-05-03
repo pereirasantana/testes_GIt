@@ -71,5 +71,5 @@ jobs:
           heroku_app_name: ${{ secrets.HEROKU_APP_NAME }}
           heroku_email: pereirasantana@yahoo.com.br
           usedocker: false
-          appdir: "build" # Diretório que contém o código pronto para ser deployed
+          appdir: "build/**/*" # Diretório que contém o código pronto para ser deployed
 
