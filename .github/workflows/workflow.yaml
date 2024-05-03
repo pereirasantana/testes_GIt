@@ -1,0 +1,63 @@
+name: teste_lucas
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  desafio-CI:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Using Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+
+      - name: run install, build and test
+        run: |
+          npm install
+          npm run build 
+          npm run test
+
+      - name: Upload artefatos release
+        uses: actions/upload-artifact@v3
+        with:
+          name: build-artifact
+          path: build/**/*
+
+      - name: Download Artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: build-artifact
+
+      - name: Zip Artifacts
+        run: |
+          zip -r build-artifact.zip build/
+
+      - name: Get the current date and time
+        id: date
+        run: echo "DATE_TIME=$(date +'%Y%m%d%H%M%S')" >> $GITHUB_ENV
+
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.MY_PAT }}
+        with:
+          tag_name: release-${{ env.DATE_TIME }}
+          release_name: Release ${{ env.DATE_TIME }}
+          draft: false
+          prerelease: false
+
+      - name: Upload Release Asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.MY_PAT }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./build-artifact.zip
+          asset_name: build-artifact.zip
+          asset_content_type: application/zip
