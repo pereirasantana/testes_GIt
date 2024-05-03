@@ -8,11 +8,8 @@ on:
 jobs:
   desafio-CI:
     runs-on: ubuntu-latest
-    # Define o ambiente que requer aprovação para o deploy, alterado para 'teste'
     environment: 
       name: teste
-      # URL opcional, que pode ser usada para visualizar o ambiente após o deploy
-      url: ${{ steps.deploy.outputs.url }}
 
     steps:
       - uses: actions/checkout@v3
@@ -50,7 +47,7 @@ jobs:
         id: create_release
         uses: actions/create-release@v1
         env:
-          GITHUB_TOKEN: ${{ secrets.MY_PAT }}
+          GITHUB_TOKEN: ${{ secrets.MY_PAT}}
         with:
           tag_name: release-${{ env.DATE_TIME }}
           release_name: Release ${{ env.DATE_TIME }}
@@ -66,3 +63,13 @@ jobs:
           asset_path: ./build-artifact.zip
           asset_name: build-artifact.zip
           asset_content_type: application/zip
+
+      - name: Deploy to Heroku
+        uses: akhileshns/heroku-deploy@v3.12.12 # Esta é a ação do Heroku para deploy
+        with:
+          heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
+          heroku_app_name: ${{ secrets.HEROKU_APP_NAME }}
+          heroku_email: pereirasantana@yahoo.com.br
+          usedocker: false
+          appdir: "build" # Diretório que contém o código pronto para ser deployed
+
