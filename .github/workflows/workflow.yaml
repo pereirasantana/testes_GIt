@@ -45,7 +45,7 @@ jobs:
         id: create_release
         uses: actions/create-release@v1
         env:
-          GITHUB_TOKEN: ${{ secrets.MY_PAT }}
+          GITHUB_TOKEN: ${{ secrets.MY_PAT}}
         with:
           tag_name: release-${{ env.DATE_TIME }}
           release_name: Release ${{ env.DATE_TIME }}
