@@ -63,7 +63,9 @@ jobs:
           asset_path: ./build-artifact.zip
           asset_name: build-artifact.zip
           asset_content_type: application/zip
-        - run: git add -A && git commit -m "Updated code"
+
+
+      - run: git add -A && git commit -m "Updated code"
       - name: Deploy to Heroku
         uses: akhileshns/heroku-deploy@v3.12.12 # Esta é a ação do Heroku para deploy
         with:
