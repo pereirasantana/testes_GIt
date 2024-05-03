@@ -13,18 +13,34 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+
+      - name: Setup Heroku CLI
+        uses: akhileshns/heroku-deploy@v3.12.12
+        with:
+          heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
+          heroku_email: pereirasantana@yahoo.com.br
+
+      - name: Setup Heroku Remote
+        run: |
+          heroku git:remote -a ${{ secrets.HEROKU_APP_NAME }}
+        env:
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+
+      - name: Pull changes from Heroku
+        run: git pull heroku main
+
       - name: Using Node.js
         uses: actions/setup-node@v2
         with:
           node-version: '16'
 
-      - name: run install, build and test
+      - name: Run install, build, and test
         run: |
           npm install
           npm run build 
           npm run test
 
-      - name: Upload artefatos release
+      - name: Upload artifacts release
         uses: actions/upload-artifact@v3
         with:
           name: build-artifact
@@ -71,4 +87,4 @@ jobs:
           heroku_app_name: ${{ secrets.HEROKU_APP_NAME }}
           heroku_email: pereirasantana@yahoo.com.br
           usedocker: false
-          appdir: "."
+          appdir: "."  # Assegure-se de que este diretório contém os arquivos necessários para executar a aplicação
