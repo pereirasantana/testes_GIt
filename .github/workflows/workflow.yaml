@@ -65,18 +65,13 @@ jobs:
           asset_content_type: application/zip
 
 
-      - run: git config user.email "pereirasantana@github.com"
-      - run: git config user.name "Github"
-      - run: git add -A && git commit -m "Updated code"
-
-      
+            
       - name: Deploy to Heroku
         uses: akhileshns/heroku-deploy@v3.12.12 # Esta é a ação do Heroku para deploy
         with:
           heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
           heroku_app_name: ${{ secrets.HEROKU_APP_NAME }}
           heroku_email: your-email@example.com
-          dontuseforce: true
-          dontautocreate: true
+        
           appdir: "build" # Diretório que contém o código pronto para ser deployed
           
