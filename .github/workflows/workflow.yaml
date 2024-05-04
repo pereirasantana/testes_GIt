@@ -70,7 +70,13 @@ jobs:
           curl -L https://fly.io/install.sh | sh
           echo "$HOME/.fly/bin" >> $GITHUB_PATH
 
+      - name: Build and Push Docker Image
+        run: |
+          docker build -t docker.io/library/myapp:${{ github.sha }} .
+          echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
+          docker push docker.io/library/myapp:${{ github.sha }}
+
       - name: Deploy to Fly.io
-        run: flyctl deploy --image myapp:${{ github.sha }} --app testes-git
+        run: flyctl deploy --image docker.io/library/myapp:${{ github.sha }} --app testes-git
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
