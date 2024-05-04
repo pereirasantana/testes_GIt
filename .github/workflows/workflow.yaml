@@ -77,6 +77,6 @@ jobs:
           docker push docker.io/library/myapp:${{ github.sha }}
 
       - name: Deploy to Fly.io
-        run: flyctl deploy --image docker.io/library/myapp:${{ github.sha }} --app testes-git
+        run: flyctl deploy --image docker.io/library/testegit:${{ github.sha }} --app testes-git
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
