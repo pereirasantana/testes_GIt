@@ -13,7 +13,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      
+
       - name: Using Node.js
         uses: actions/setup-node@v2
         with:
@@ -48,7 +48,7 @@ jobs:
         id: create_release
         uses: actions/create-release@v1
         env:
-          GITHUB_TOKEN: ${{ secrets.MY_PAT}}
+          GITHUB_TOKEN: ${{ secrets.MY_PAT }}
         with:
           tag_name: release-${{ env.DATE_TIME }}
           release_name: Release ${{ env.DATE_TIME }}
@@ -65,8 +65,10 @@ jobs:
           asset_name: build-artifact.zip
           asset_content_type: application/zip
 
-      - name: Build Docker Image
-        run: docker build -t myapp:${{ github.sha }} .
+      - name: Install Fly.io CLI
+        run: |
+          curl -L https://fly.io/install.sh | sh
+          echo "$HOME/.fly/bin" >> $GITHUB_PATH
 
       - name: Login to Fly.io
         run: flyctl auth token --token ${{ secrets.FLY_API_TOKEN }}
