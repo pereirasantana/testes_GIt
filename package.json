@@ -49,6 +49,7 @@
   },
   "devDependencies": {
     "@faker-js/faker": "^7.6.0",
+    "@flydotio/dockerfile": "^0.5.7",
     "@types/styled-components": "^5.1.21",
     "@types/uuid": "^8.3.4"
   }
