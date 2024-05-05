@@ -11,10 +11,23 @@ jobs:
     name: 'Check Required Files'
     steps:
       - uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build the TypeScript Action
+        run: npm run build
+
       - name: Verify presence of Dockerfile and fly.toml
-        uses: ./check-files/lib/
+        uses: /check-files/lib/checkFiles.js
 
   desafio-CI:
+    needs: Verificacao
     runs-on: ubuntu-latest
     environment: 
       name: teste
@@ -31,7 +44,7 @@ jobs:
         run: |
           npm install
           npm run build 
-          npm run test
+          npm test
 
       - name: Zip Artifacts
         run: |
