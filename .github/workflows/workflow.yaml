@@ -17,7 +17,7 @@ jobs:
       - name: Using Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '16 b'
+          node-version: '16b'
 
       - name: Run install, build and test
         run: |
@@ -52,10 +52,10 @@ jobs:
         if: failure()
         uses: dawidd6/action-send-mail@v2
         with:
-          server_address: smtp.sendgrid.net
-          server_port: 465
-          username: apikey
-          password: ${{ secrets.SENDGRID_API_KEY }}
+          server_address: smtp.mailgun.org
+          server_port: 587
+          username: 'api'
+          password: ${{ secrets.MAILGUN_API_KEY }}
           subject: CI/CD Pipeline Failure Notification
           to: pereirasantana@yahoo.com.br
           from: lucas.pereira@itfourbs.com.br
