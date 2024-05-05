@@ -32,9 +32,6 @@ jobs:
       - name: Get the current date and time
         run: echo "DATE_TIME=$(date +'%Y%m%d%H%M%S')" >> $GITHUB_ENV
 
-      - name: Print SHA
-        run: echo "SHA for this commit is ${{ github.sha }}"
-
       - name: Install Fly.io CLI
         run: |
           curl -L https://fly.io/install.sh | bash
