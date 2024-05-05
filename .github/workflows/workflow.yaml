@@ -72,9 +72,9 @@ jobs:
 
       - name: Build and Push Docker Image
         run: |
-          docker build -t docker.io/library/testegit:${{ github.sha }} .
+          docker build -t pereirasantana1991/testegit:${{ github.sha }} .
           echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
-          docker push docker.io/library/testegit:${{ github.sha }}
+          docker push pereirasantana1991/testegit:${{ github.sha }
 
       - name: Deploy to Fly.io
         run: flyctl deploy --image docker.io/library/testegit:${{ github.sha }} --app testes-git
