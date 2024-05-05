@@ -25,8 +25,8 @@ jobs:
       - name: Build the TypeScript Action
         run: npm run build
 
-      - name: Verify presence of Dockerfile and fly.toml
-        uses: /check-files/lib/checkFiles.js
+      - name: Verify presence of Dockerfile and fly
+        uses: ./check-files/lib/checkFiles.js
 
   desafio-CI:
     needs: Verificacao
