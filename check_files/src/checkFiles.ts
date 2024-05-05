@@ -18,7 +18,11 @@ async function run() {
 
     console.log("All required files are present.");
   } catch (error) {
-    core.setFailed(error.message);
+    if (error instanceof Error) {
+      core.setFailed(error.message); // Acesso seguro à propriedade message.
+    } else {
+      core.setFailed("An unknown error occurred."); // Tratamento para tipos de erro desconhecidos.
+    }
   }
 }
 
