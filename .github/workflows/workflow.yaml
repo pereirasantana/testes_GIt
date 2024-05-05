@@ -60,3 +60,4 @@ jobs:
           to: pereirasantana@yahoo.com.br
           from: lucas.pereira@itfourbs.com.br
           body: The CI/CD pipeline for 'teste_lucas' has failed. Please check the GitHub Actions logs for more details.
+          content_type: text/plain
