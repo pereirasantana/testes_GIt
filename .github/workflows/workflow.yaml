@@ -47,12 +47,12 @@ jobs:
           npm install
           npm run build 
           npm test
-        working-directory: ./check_files
+        
 
       - name: Zip Artifacts
         run: |
           zip -r build-artifact.zip build/
-        working-directory: ./check_files
+        
 
       - name: Get the current date and time
         run: echo "DATE_TIME=$(date +'%Y%m%d%H%M%S')" >> $GITHUB_ENV
