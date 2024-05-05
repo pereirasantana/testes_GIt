@@ -54,7 +54,7 @@ jobs:
         with:
           server_address: smtp.mailgun.org
           server_port: 587
-          username: 'api'
+          username: 'lucas.pereira@itfourbs.com.br'
           password: ${{ secrets.MAILGUN_API_KEY }}
           subject: CI/CD Pipeline Failure Notification
           to: pereirasantana@yahoo.com.br
