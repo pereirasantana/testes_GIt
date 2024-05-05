@@ -47,3 +47,16 @@ jobs:
         run: flyctl deploy --image pereirasantana1991/testegit:${{ github.sha }} --app testes-git
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+
+      - name: Send failure notification email
+        if: failure()
+        uses: dawidd6/action-send-mail@v2
+        with:
+          server_address: smtp.sendgrid.net
+          server_port: 465
+          username: apikey
+          password: ${{ secrets.SENDGRID_API_KEY }}
+          subject: CI/CD Pipeline Failure Notification
+          to: pereirasantana@yahoo.com.br
+          from: ci-cd-notifier@example.com
+          body: The CI/CD pipeline for 'teste_lucas' has failed. Please check the GitHub Actions logs for more details.
