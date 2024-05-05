@@ -74,7 +74,7 @@ jobs:
         run: |
           docker build -t pereirasanta1991/testegit:${{ github.sha }} .
           echo "${{ secrets.DOCKER_TOKEN }}" | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
-          docker tag testegit pereirasanta1991/testegit:${{ github.sha }}
+          docker tag testegit pereirasanta1991/testegit
           docker push pereirasanta1991/testegit:${{ github.sha }}
 
       - name: Deploy to Fly.io
