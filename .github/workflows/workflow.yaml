@@ -32,7 +32,9 @@ jobs:
       - name: Get the current date and time
         run: echo "DATE_TIME=$(date +'%Y%m%d%H%M%S')" >> $GITHUB_ENV
 
-     
+      - name: Print SHA
+        run: echo "SHA for this commit is ${{ github.sha }}"
+
       - name: Build and Push Docker Image
         run: |
           docker build -t pereirasantana1991/testegit:${{ github.sha }} .
