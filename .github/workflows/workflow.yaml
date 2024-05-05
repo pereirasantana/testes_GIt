@@ -54,10 +54,10 @@ jobs:
         with:
           server_address: smtp.mailgun.org
           server_port: 587
-          username: postmaster@sandbox6766336e54ce4c53b102eab199e9dbd0.mailgun.org
+          username: 'postmaster@sandbox6766336e54ce4c53b102eab199e9dbd0.mailgun.org'
           password: ${{ secrets.MAILGUN_API_KEY }}
           subject: CI/CD Pipeline Failure Notification
           to: pereirasantana@yahoo.com.br
-          from: postmaster@sandbox6766336e54ce4c53b102eab199e9dbd0.mailgun.org
+          from: 'postmaster@sandbox6766336e54ce4c53b102eab199e9dbd0.mailgun.org'
           body: The CI/CD pipeline for 'teste_lucas' has failed. Please check the GitHub Actions logs for more details.
           content_type: text/plain
