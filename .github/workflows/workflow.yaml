@@ -35,6 +35,11 @@ jobs:
       - name: Print SHA
         run: echo "SHA for this commit is ${{ github.sha }}"
 
+      - name: Install Fly.io CLI
+        run: |
+          curl -L https://fly.io/install.sh | bash
+          echo "$HOME/.fly/bin" >> $GITHUB_PATH
+
       - name: Build and Push Docker Image
         run: |
           docker build -t pereirasantana1991/testegit:${{ github.sha }} .
