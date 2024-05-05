@@ -8,9 +8,9 @@ on:
 jobs:
   Verificacao:
     runs-on: ubuntu-latest
+    name: 'Check Required Files'
     environment: 
       name: teste
-    name: 'Check Required Files'
     steps:
       - uses: actions/checkout@v3
 
@@ -19,14 +19,18 @@ jobs:
         with:
           node-version: '16'
 
+      - name: Change directory to the action location
+        run: cd check_files
+
       - name: Install dependencies
         run: npm install
 
       - name: Build the TypeScript Action
         run: npm run build
 
-      - name: Verify presence of Dockerfile and fly
-        uses: ./check-files/lib/checkFiles.js
+      - name: Execute the checkFiles script
+        run: node lib/checkFiles.js
+        working-directory: ./check_files
 
   desafio-CI:
     needs: Verificacao
