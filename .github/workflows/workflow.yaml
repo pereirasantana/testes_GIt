@@ -44,7 +44,7 @@ jobs:
           docker push pereirasantana1991/testegit:${{ github.sha }}
 
       - name: Deploy to Fly.io
-        run: flyctl deploy --image pereirasantana1991/testegit:${{ github.sha }} --app testes-git
+        run: flyctl deploy --image pereirasantana1991/testegit2:${{ github.sha }} --app testes-git
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
 
