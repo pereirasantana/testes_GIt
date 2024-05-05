@@ -19,14 +19,11 @@ jobs:
         with:
           node-version: '16'
 
-      - name: Change directory to the action location
-        run: cd check_files
-
-      - name: Install dependencies
-        run: npm install
-
-      - name: Build the TypeScript Action
-        run: npm run build
+      - name: Install dependencies and build TypeScript action
+        run: |
+          npm install
+          npm run build
+        working-directory: ./check_files
 
       - name: Execute the checkFiles script
         run: node lib/checkFiles.js
@@ -37,7 +34,6 @@ jobs:
     runs-on: ubuntu-latest
     environment: 
       name: teste
-
     steps:
       - uses: actions/checkout@v3
 
@@ -51,10 +47,12 @@ jobs:
           npm install
           npm run build 
           npm test
+        working-directory: ./check_files
 
       - name: Zip Artifacts
         run: |
           zip -r build-artifact.zip build/
+        working-directory: ./check_files
 
       - name: Get the current date and time
         run: echo "DATE_TIME=$(date +'%Y%m%d%H%M%S')" >> $GITHUB_ENV
