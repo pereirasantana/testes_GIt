@@ -7,14 +7,12 @@ on:
 
 jobs:
   Verificacao:
-  name: 'Check Required Files'
-  description: 'Check if Dockerfile and fly.toml are present in the repository'
-  runs: ubuntu-latest
+    runs-on: ubuntu-latest
+    name: 'Check Required Files'
     steps:
-      using: 'node16'
-      main: 'check_files/lib/checkFiles.js'
-
-
+      - uses: actions/checkout@v3
+      - name: Verify presence of Dockerfile and fly.toml
+        uses: ./check-files/lib/
 
   desafio-CI:
     runs-on: ubuntu-latest
