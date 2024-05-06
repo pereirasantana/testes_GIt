@@ -47,7 +47,17 @@ jobs:
           npm install
           npm run build 
           npm test
-        
+
+      - name: Upload artefatos release
+        uses: actions/upload-artifact@v3
+        with:
+          name: build-artifact
+          path: build/**/*
+
+      - name: Download Artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: build-artifact 
 
       - name: Zip Artifacts
         run: |
