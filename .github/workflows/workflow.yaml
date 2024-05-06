@@ -27,7 +27,7 @@ jobs:
 
       - name: Execute the checkFiles script
         run: node lib/checkFiles.js
-        working-directory: ./check_files
+        working-directory: ./check_file
 
       - name: Send failure notification email
         if: failure()
