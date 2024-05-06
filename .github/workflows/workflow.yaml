@@ -62,7 +62,7 @@ jobs:
           npm run build 
           npm test
 
-      - name: Upload artefatos release
+      - name: build artefacts release
         uses: actions/upload-artifact@v3
         with:
           name: build-artifact
