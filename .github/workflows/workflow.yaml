@@ -29,6 +29,20 @@ jobs:
         run: node lib/checkFiles.js
         working-directory: ./check_files
 
+      - name: Send failure notification email
+        if: failure()
+        uses: dawidd6/action-send-mail@v2
+        with:
+          server_address: smtp.mailgun.org
+          server_port: 587
+          username: 'postmaster@sandbox6766336e54ce4c53b102eab199e9dbd0.mailgun.org'
+          password: ${{ secrets.MAILGUN_API_KEY }}
+          subject: Falha na pipeline
+          to: pereirasantana@yahoo.com.br
+          from: 'postmaster@sandbox6766336e54ce4c53b102eab199e9dbd0.mailgun.org'
+          body: A pipeline 'teste_lucas' falhou. Verifique o GitHHub Actions.
+          content_type: text/plain
+
   desafio-CI:
     needs: Verificacao
     runs-on: ubuntu-latest
@@ -112,8 +126,8 @@ jobs:
           server_port: 587
           username: 'postmaster@sandbox6766336e54ce4c53b102eab199e9dbd0.mailgun.org'
           password: ${{ secrets.MAILGUN_API_KEY }}
-          subject: CI/CD Pipeline Failure Notification
+          subject: Falha na pipeline
           to: pereirasantana@yahoo.com.br
           from: 'postmaster@sandbox6766336e54ce4c53b102eab199e9dbd0.mailgun.org'
-          body: The CI/CD pipeline for 'teste_lucas' has failed. Please check the GitHub Actions logs for more details.
+          body: A pipeline 'teste_lucas' falhou. Verifique o GitHHub Actions.
           content_type: text/plain
